@@ -10,18 +10,18 @@ namespace LanguageFeatures.Controllers
 {
     public class HomeController : Controller
     {
-        public ViewResult Index()
-        {
-            List<string> results = new List<string>();
+        public IRepository Repository = SimpleRepository.SharedRepository;
 
-            foreach (Product p in Product.GetProducts())
-            {
-                string name = p?.Name ?? "<No name>";
-                decimal? price = p?.Price ?? 0;
-                string relatedName = p?.Related?.Name ?? "<None>";
-                results.Add($"{nameof (p.Name)}: {name}, {nameof(p.Price)}: {price}, {nameof(p.Related)}: {relatedName}");
-            }
-            return View(results);
+        public IActionResult Index() => View(Repository.Products);
+
+        [HttpGet]
+        public IActionResult AddProduct() => View(new Product());
+
+        [HttpPost]
+        public IActionResult AddProduct(Product p)
+        {
+            Repository.AddProduct(p);
+            return RedirectToAction("Index");
         }
     }
 }

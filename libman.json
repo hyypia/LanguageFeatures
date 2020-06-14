@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+    "libraries": [
+        {
+            "library": "bootstrap-daterangepicker@3.0.5",
+            "destination": "wwwroot/lib/"
+        },
+        {
+            "provider": "unpkg",
+            "library": "bootstrap@4.5.0",
+            "destination": "wwwroot/lib/bootstrap/"
+        }
+    ]
+}
